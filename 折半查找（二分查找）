@@ -22,7 +22,7 @@ public class MyUtil{
         int low = 0;
         int high = arr.length - 1;
         while(low <= high){
-            int mid = (low + high)>>>1;
+            int mid = (low + high)>>>1; //无符号右移
             int result = comp.compare(arr[mid],key);
             if(result < 0){
                 low = mid + 1;
