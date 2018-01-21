@@ -1,0 +1,37 @@
+public class MyUtil{
+    public static <T extends Comparable<T>> int binarySearch(T[] arr,T key){
+        return binarySearch(arr,0,arr.length-1,key);
+    }
+    //递归实现二分查找
+    public static <T extends Comparable<T>> int binarySearch(T[] arr,int low,int high,T key){
+        if(low <= high){
+            int mid = low + ((high - low)>>1);
+            if(key.compareTo(arr[mid])==0){
+                return mid;
+            }else if(key.compareTo(arr[mid])<0){
+                 return binarySearch(arr,low,mid-1,key);
+            }else{
+                 return binarySearch(arr,mid+1,high,key);
+            }
+        }
+        return -1;
+    }
+
+    // 循环实现二分查找
+    public static <T> int binarySearch(T[] arr,T key,Comparator<T> comp){
+        int low = 0;
+        int high = arr.length - 1;
+        while(low <= high){
+            int mid = (low + high)>>>1;
+            int result = comp.compare(arr[mid],key);
+            if(result < 0){
+                low = mid + 1;
+            }else if(result > 0){
+                high = mid - 1;
+            }else{
+                return mid;
+            }
+        }
+        return -1;
+    }
+}
