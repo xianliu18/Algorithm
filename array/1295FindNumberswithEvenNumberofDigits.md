@@ -39,6 +39,22 @@ public int findNumbers(int[] nums) {
 ### 2,正确解法
 
 ```
-
-
+public int findNumbers(int[] nums) {
+    // 起始数字，从1开始
+    int digitNum = 1;
+    int result = 0;
+    int current = 0;
+    for (int i = 0; i < nums.length; i++) {
+        current = nums[i];
+        while((current = current / 10) != 0) {
+            digitNum++;
+        }
+        if (digitNum % 2 == 0) {
+            result++;
+        }
+        // 此处，恢复为1
+        digitNum = 1;
+    }
+    return result;
+}
 ```
