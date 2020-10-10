@@ -19,7 +19,7 @@
              m++;
          }
      }
-     for (int j = nums.length - m - 1, n = nums.length = 1; j >= 0; j--, n--) {
+     for (int j = nums.length - m - 1, n = nums.length - 1; j >= 0; j--, n--) {
          nums[n] = nums[j];
          if (nums[j] == 0) {
              nums[--n] = 0;
@@ -31,5 +31,27 @@
 ### 2,正确解法
 
 ```
-
+public void duplicateZeros2(int[] nums) {
+    int countZero = 0;
+    for (int i = 0; i < nums.length; i++) {
+        countZero++;
+    }
+    int len = nums.length + countZero;
+    // m point to the original array, j point to the new location
+    for (int m = nums.length - 1, j = len - 1; i < j; i--, j--) {
+        if (nums[m] != 0) {
+            if (j < nums.length) {
+                nums[j] = nums[m];
+            }
+        } else {
+            if (j < nums.length) {
+                nums[j] = nums[m];
+            }
+            j--;
+            if (j < nums.length) {
+                nums[j] = nums[m];
+            }
+        }
+    }
+}
 ```
