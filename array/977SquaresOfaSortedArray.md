@@ -57,6 +57,4 @@ public int[] sortedSquares(int[] nums) {
     return result;
 }
 
-// 解法二:
-
 ```
