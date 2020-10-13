@@ -20,6 +20,9 @@
 ```
 // 注意题目中的Sorted Array
 // 由于是有序数组,所以不会出现{1,2,3,1,4}的情况
+// 解释说明: two-pointer technique(readPointer, writePointer)
+// https://leetcode.com/explore/learn/card/fun-with-arrays/511/in-place-operations/3255/
+
 public int removeDup(int[] nums) {
     if (nums.length == 0) {
         return 0;
