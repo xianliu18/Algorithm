@@ -12,7 +12,7 @@
 ### 2,正确解法
 
 ```
-// 解法一:
+// 解法一: 改变了链表
 public boolean hasCycle(ListNode head) {
     ListNode p = head;
     ListNode pre = head;
@@ -28,19 +28,26 @@ public boolean hasCycle(ListNode head) {
 }
 
 // 解法二: Two pointer
-public boolean hasCycle2(ListNode head) {
+// Youtube: https://www.youtube.com/watch?v=zbozWoMgKW0
+// a + 2b + c = 2(a + b)
+// https://leetcode.com/problems/linked-list-cycle-ii/discuss/44774/Java-O(1)-space-solution-with-detailed-explanation.
+
+
+public ListNode hasCycle2(ListNode head) {
     ListNode fast = head;
     ListNode slow = head;
     while (fast != null && fast.next != null) {
-        if (fast.next == head) {
-            return true;
-        }
         fast = fast.next.next;
         slow = slow.next;
         if (fast == slow) {
-            return true;
+            ListNode slow2 = head;
+            while (slow != slow2) {
+                slow2 = slow2.next;
+                slow = slow.next;
+            }
+            return slow;
         }
     }
-    return false;
+    return null;
 }
 ```
