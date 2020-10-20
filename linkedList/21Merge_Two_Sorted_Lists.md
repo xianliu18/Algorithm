@@ -75,13 +75,14 @@ class Solution {
         if (l1 == null || l2 == null) {
             return l1 == null ? l2 : l1;
         }
-        ListNode head = null;
+        ListNode prev = new ListNode(0);
+        ListNode head = prev;
         if (l1.val < l2.val) {
-            head = l1;
-            head.next = mergeTwoLists(l1.next, l2);
+            prev.val = l1.val;
+            prev.next = mergeTwoLists(l1.next, l2);
         } else {
-            head = l2;
-            head.next = mergeTwoLists(l1, l2.next);
+            prev.val = l2.val;
+            prev.next = mergeTwoLists(l1, l2.next);
         }
         return head;
     }
