@@ -1,5 +1,6 @@
 ## 二叉树学习
 
+![二叉树数据](https://github.com/Noodlescn/Algorithm/blob/master/BinaryTree/Introduction/Example1.png)
 
 ### 1, Binary Tree Traversal
 - PreOrder(前序遍历):`V - L - R`
