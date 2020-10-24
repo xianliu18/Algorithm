@@ -2,6 +2,11 @@
 
 ![二叉树数据](https://github.com/Noodlescn/Algorithm/blob/master/BinaryTree/Introduction/Example1.png)
 
+**参考资料:**
+- [Binary Tree](https://www.youtube.com/watch?v=ZM-sV9zQPEs&list=PLrmLmBdmIlpv_jNDXtJGYTPNQ2L1gdHxu&index=1&pbjreload=101)
+- [Algorithms(4th Edition)](https://www.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_3?dchild=1&keywords=algorithm&qid=1603512435&sr=8-3)
+
+
 ### 0. TreeNode 代码定义
 
 ```
@@ -29,21 +34,43 @@ public class TreeNode {
 - PostOrder(后序遍历):`L - R - V`
   - 按照上图数据,输出结果:`5  3  6  15  9  8  2  30  10`
 
-其中:
-V: 表示当前节点,visited
-L: 当前节点的左节点,left
-R: 当前节点的右节点,right
+其中:<br/>
+V: 表示当前节点,visited <br/>
+L: 当前节点的左节点,left <br/>
+R: 当前节点的右节点,right <br/>
 
 #### 1.1 PreOrder(前序遍历)
 
 ```
 // 算法实现
-// 方法一: Recursive
+/*********** Recursive ***********/
+
 public void preOrder(TreeNode head) {
     if (head != null) {
         System.out.println(head.val);
         preOrder(head.left);
         preOrder(head.right);
+    }
+}
+
+
+/*********** Iterative ***********/
+
+public void iterPreOrder(TreeNode head) {
+    if (head == null) {
+        return;
+    }
+    Stack<TreeNode> stack = new Stack<TreeNode>();
+    stack.add(head);
+    while (!stack.isEmpty()) {
+        head = stack.pop();
+        System.out.println(head.val);
+        if (head.right != null) {
+            stack.push(head.right);
+        }
+        if (head.left != null) {
+            stack.push(head.left);
+        }
     }
 }
 ```
@@ -52,7 +79,8 @@ public void preOrder(TreeNode head) {
 
 ```
 // 算法实现
-// 方法一: Recursive
+/*********** Recursive ***********/
+
 public void inOrder(TreeNode head) {
     if (head != null) {
         inOrder(head.left);
@@ -61,11 +89,81 @@ public void inOrder(TreeNode head) {
     }
 }
 
+
+/*********** Iterative ***********/
+public void iterInOrder(TreeNode head) {
+    if (head == null) {
+        return;
+    }
+    Stack<TreeNode> stack = new Stack<TreeNode>();
+    while (true) {
+        if (head != null) {
+            stack.push(head);
+            head = head.left;
+        } else {
+            if (s.isEmpty()) {
+                break;
+            }
+            head = head.pop();
+            System.out.println(head.val);
+            head = head.right;
+        }
+    }
+}
+
+
 ```
 
 #### 1.3 PostOrder(后序遍历)
 
 ```
+// Iterative with two Stack
+public void iteratePostOrder(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Stack<TreeNode> s1 = new Stack<TreeNode>();
+    Stack<TreeNode> s2 = new Stack<TreeNode>();
+    s1.push(root);
+    while (!s1.isEmpty()) {
+        root = s1.pop();
+        s2.push(root);
+        if (root.left != null) {
+            s1.push(root.left);
+        }
+        if (root.right != null) {
+            s1.push(root.right);
+        }
+    }
+    while (!s2.isEmpty()) {
+        root = s2.pop();
+        System.out.println(root.val);
+    }
+}
+```
+
+#### 1.4 Level Order Traversal
+
+```
+public void levelOrderTraversal(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    // 队列
+    Queue<TreeNode> queue = new LinkedList<TreeNode>();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+        root = queue.peek();
+        Sysem.out.println(root.val);
+        if (root.left != null) {
+            queue.add(root.left);
+        }
+        if (root.right != null) {
+            queue.add(root.right);
+        }
+    }
+}
+
 ```
 
 ### 2. Binary Search Tree(BST, 二分查找树)
@@ -173,8 +271,45 @@ public int height(TreeNode root) {
 }
 ```
 
+#### 3.4 Root To Leaf Sum Binary Tree
 
+```
+public boolean rootToLeafSum(TreeNode root, int sum, List<Integer> result) {
+    if (root == null) {
+        return false;
+    }
+    // 判断该结点,是否为叶子结点
+    if (root.left == null && root.right == null) {
+        if (root.val == sum) {
+            result.add(root.val);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    if (rootToLeafSum(root.left, sum - root.val, result)) {
+        result.add(root.val);
+        return true;
+    }
+    if (rootToLeafSum(root.right, sum - root.val, result)) {
+        result.add(root.val);
+        return true;
+    }
+    return false;
+}
 
-**参考资料**
--[Binary Tree](https://www.youtube.com/watch?v=ZM-sV9zQPEs&list=PLrmLmBdmIlpv_jNDXtJGYTPNQ2L1gdHxu&index=1&pbjreload=101)
--[Algorithms(4th Edition)](https://www.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X/ref=sr_1_3?dchild=1&keywords=algorithm&qid=1603512435&sr=8-3)
+```
+
+#### 3.5 Is Binary Tree a Binary Search Tree
+
+```
+public boolean isBST(TreeNode root, int min, int max) {
+    if (root == null) {
+        return true;
+    }
+    if (root.val <= min || root.val > max) {
+        return false;
+    }
+    return isBST(root.left, min, max) && isBST(root.right, min, max);
+}
+```
