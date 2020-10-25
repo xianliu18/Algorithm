@@ -117,7 +117,7 @@ public void iterInOrder(TreeNode head) {
 #### 1.3 PostOrder(后序遍历)
 
 ```
-// Iterative with two Stack
+/*********** Two Stacks ***********/
 public void iteratePostOrder(TreeNode root) {
     if (root == null) {
         return;
@@ -138,6 +138,31 @@ public void iteratePostOrder(TreeNode root) {
     while (!s2.isEmpty()) {
         root = s2.pop();
         System.out.println(root.val);
+    }
+}
+
+
+/*********** One Stack ***********/
+public void postOrderIterOneStack(TreeNode root) {
+    TreeNode current = root;
+    Deque<TreeNode> stack = new LinkedList<>();
+    while (current != null || !stack.isEmpty()) {
+        if (current != null) {
+            stack.addFirst(current);
+            current = current.left;
+        } else {
+            TreeNode temp = stack.peek().right;
+            if (temp == null) {
+                temp = stack.poll();
+                System.out.print(temp.val + " ");
+                while (!stack.isEmpty() && temp == stack.peek().right) {
+                    temp = stack.poll();
+                    System.out.print(temp.val + " ");
+                }
+            } else {
+                current = temp;
+            }
+        }
     }
 }
 ```
@@ -165,6 +190,247 @@ public void levelOrderTraversal(TreeNode root) {
 }
 
 ```
+
+#### 1.4.1 Level Order Traversal Level By Level
+
+```
+/*********** Two Queues ***********/
+public void levelByLevelTraversal(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Queue<TreeNode> q1 = new LinkedList<>();
+    Quue<TreeNode> q2 = new LinkedList<>();
+    q1.add(root);
+    while (!q1.isEmpty() || !q2.isEmpty()) {
+        while (!q1.isEmpty()) {
+            root = q1.pop();
+            System.out.println(root.val + " ");
+            if (root.left != null) {
+                q2.add(root.left);
+            }
+            if (root.right != null) {
+                q2.add(root.right);
+            }
+        }
+        // 打印换行符
+        System.out.println();
+        while (!q2.isEmpty()) {
+            root = q2.pop();
+            System.out.println(root.val + " ");
+            if (root.left != null) {
+                q1.add(root.left);
+            }
+            if (root.right != null) {
+                q1.add(root.right);
+            }
+        }
+        System.out.println();
+    }
+}
+
+
+/*********** One Queue & Delimiter ***********/
+public void levelByLevelOneQueueUsingDelimiter(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Queue<TreeNode> q = new LinkedList<>();
+    q.add(root);
+    q.add(null);
+    while (!q.isEmpty()) {
+        root = q.pop();
+        if (root != null) {
+            System.out.println(root.val + " ");
+            if (root.left != null) {
+                q.add(root.left);
+            }
+            if (root.right != null) {
+                q.add(root.right);
+            }
+        } else {
+            if (!q.isEmpty()) {
+                Sytem.out.println();
+                q.add(null);
+            }
+        }
+    }
+}
+
+/*********** One Queue & Counter ***********/
+public void levelByLevelOneQueueUsingCount(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Queue<TreeNode> q = new LinkedList<>();
+    int levelCount = 1;
+    int currentCount = 0;
+    q.add(root);
+    while (!q.isEmpty()) {
+        while (levelCount > 0) {
+            root = q.pop();
+            System.out.println(root.val + " ");
+            if (root.left != null) {
+                currentCount++;
+                q.add(root.left);
+            }
+            if (root.right != null) {
+                currentCount++;
+                q.add(root.right);
+            }
+            levelCount--;
+        }
+        System.out.println();
+        levelCount = currentCount;
+        currentCount = 0;
+    }
+}
+```
+
+#### 1.4.2 Level Order Traversal In Reverse
+
+```
+/*********** One Queue & One Stack ***********/
+public void levelOrderTraversalInReverse(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Queue<TreeNode> q = new LinkedList<>();
+    Stack<TreeNode> s = new Stack<>();
+    q.add(root);
+    while (!q.isEmpty()) {
+        root = q.pop();
+        if (root.right != null) {
+            q.add(root.right);
+        }
+        if (root.left != null) {
+            q.add(root.left);
+        }
+        s.push(root);
+    }
+    while (!s.isEmpty()) {
+        System.out.println(s.pop().val);
+    }
+}
+```
+
+#### 1.4.2 Level Order Traversal In Spiral Order
+
+```
+/*********** Two Stacks ***********/
+public void levelTraversalSpiralOrder(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Stack<TreeNode> s1 = new Stack<>();
+    Stack<TreeNode> s2 = new Stack<>();
+    s1.push(root);
+    while (!s1.isEmpty() || !s2.isEmpty()) {
+        while (!s1.isEmpty()) {
+            root = s1.pop();
+            System.out.println(root.val + " ");
+            if (root.left != null) {
+                s2.push(root.left);
+            }
+            if (root.right != null) {
+                s2.push(root.right);
+            }
+        }
+        while (!s2.isEmpty()) {
+            root = s2.pop();
+            System.out.println(root.val + " ");
+            if (root.right != null) {
+                s1.push(root.right);
+            }
+            if (root.left != null) {
+                s1.push(root.left);
+            }
+        }
+    }
+}
+
+
+/*********** A Deque and Delimiter***********/
+public void spiralWithDequeDelimiter(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Deque<TreeNode> deque = new LinkedList<>();
+    deque.offer(null);
+    deque.offFirst(root);
+    // if only delimiter(in this case null) is left in queue then break;
+    while (q.size() > 1) {
+        root = q.peekFirst();
+        while (root != null) {
+            root = q.pollFirst();
+            System.out.print(root.val + " ");
+            if (root.left != null) {
+                q.offerLast(root.left);
+            }
+            if (root.right != null) {
+                q.offerLast(root.right);
+            }
+            root = q.peekFirst();
+        }
+        root = q.peekLast();
+        while (root != null) {
+            System.out.print(root.val + " ");
+            root = q.pollLast();
+            if (root.right != null) {
+                q.offerFirt(root.right);
+            }
+            if (root.left != null) {
+                q.offerFirst(root.left);
+            }
+            root = q.peekLast();
+        }
+    }
+}
+
+
+/*********** One Queue and Counter ***********/
+public void spiralWithOneDeque(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    Deque<TreeNode> deque = new LinkedList<>();
+    deque.offerFirst(root);
+    int count = 1;
+    boolean flip = true;
+    while (!deque.isEmpty()) {
+        int currentCount = 0;
+        while (count > 0) {
+            if (flip) {
+                root = deque.pollFirst();
+                System.out.print(root.val + " ");
+                if (root.left != null) {
+                    deque.offerLast(root.left);
+                    currentCount++;
+                }
+                if (root.right != null) {
+                    deque.offerLast(root.right);
+                    currentCount++;
+                }
+            } else {
+                root = deque.pollLast();
+                System.out.print(root.val + " ");
+                if (root.right != null) {
+                    deque.offerFirst(root.right);
+                    currentCount++;
+                }
+                if (root.left != null) {
+                    deque.offerFirst(root.left);
+                    currentCount++;
+                }
+            }
+            count--;
+        }
+        flip = !flip;
+        count = currentCount;
+    }
+}
+```
+
 
 ### 2. Binary Search Tree(BST, 二分查找树)
 - 定义(摘自<算法(第四版)>):
@@ -225,6 +491,7 @@ public TreeNode insert(TreeNode root, int data) {
     return root;
 }
 ```
+
 
 ### 3. Question
 #### 3.1 Same Tree
@@ -311,5 +578,108 @@ public boolean isBST(TreeNode root, int min, int max) {
         return false;
     }
     return isBST(root.left, min, max) && isBST(root.right, min, max);
+}
+```
+
+#### 3.6 Lowest Common Ancestor in Binary Search Tree
+
+```
+public TreeNode lowestCommonAncestor(TreeNode root, int p, int q) {
+    if (root.val > Math.max(p, q)) {
+        lowestCommonAncestor(root.left, p, q);
+    } else (root.val < Math.min(p, q)) {
+        lowestCommonAncestor(root.right, p, q);
+    } else {
+        return root;
+    }
+}
+```
+
+#### 3.6.1 Lowest Common Ancestor in Binary Tree
+
+```
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode t1, TreeNode t2) {
+    if (root == null) {
+        return null;
+    }
+    if (root == n1 || root == n2) {
+        return root;
+    }
+
+    TreeNode left = lowestCommonAncestor(root.left, t1, t2);
+    TreeNode right = lowestCommonAncestor(root.right, t1, t2);
+
+    if (left != null && right != null) {
+        return root;
+    }
+    return left != null ? left : right;
+}
+```
+
+#### 3.7 Largest BST in Binary Tree
+
+```
+/**
+ * Traverse tree in post order fashion. Left and right nodes return 4 piece of information
+ * to root which isBST, size of max BST, min and max in those subtree.
+ * If both left and right subtree are BST and this node data is greater than max of left and 
+ * less than min of right then it returns to above level left size + right size + 1 and new
+ * min will be min of left side and new max will be max of right side.
+ * 
+ * References:
+ * http://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/
+ * https://leetcode.com/problems/largest-bst-subtree/
+ */
+public class LargestBSTInBinaryTree {
+
+    public int largestBST(TreeNode root) {
+        MinMax m = largest(root);
+        return m.size;
+    }
+
+    private MinMax largest(TreeNode root) {
+        if (root == null) {
+            return new MinMax();
+        }
+
+        // PostOrder traversal of tree. First visit left and right then
+        // use information of left and right to calculate largest BST
+        MinMax leftMinMax = largest(root.left);
+        MinMax rightMinMax = largest(root.right);
+
+        MinMax m = new MinMax();
+        if (leftMinMax.isBST == false || rightMinMax.isBST == false ||
+            (leftMinMax.max > root.val || rightMinMax.min <= root.val)) {
+                m.isBST = false;
+                m.size = Math.max(leftMinMax.size, rightMinMax.size);
+                return m;
+        }
+
+        // If we reach this point means subtree with this node as root is BST.
+        // Set isBST as true.
+        // Then set size as size of left + size of right + 1.
+        // Set min and max to be returned to parent.
+        m.isBST = true;
+        m.size = leftMinMax.size + rightMinMax.size + 1;
+        m.min = root.left != null ? leftMinMax.min : root.val;
+        m.max = root.right != null ? rightMinMax.max : root.val;
+        
+        return m;
+    }
+
+}
+
+class MinMax {
+    int min;
+    int max;
+    boolean isBST;
+    int size;
+
+    MinMax() {
+        min = Integer.MAX_VALUE;
+        max = Integer.MIN_VALUE;
+        isBST = true;
+        size = 0;
+    }
 }
 ```
