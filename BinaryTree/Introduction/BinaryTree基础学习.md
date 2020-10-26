@@ -548,9 +548,8 @@ public TreeNode insert(TreeNode root, int data) {
 }
 ```
 
-
-### 3. Question
-#### 3.1 Same Tree
+### 4. Question
+#### 4.1 Same Tree
 
 ```
 public boolean sameTree(TreeNode root1, TreeNode root2) {
@@ -567,7 +566,7 @@ public boolean sameTree(TreeNode root1, TreeNode root2) {
 }
 ```
 
-#### 3.2 Size Of Binary Tree
+#### 4.2 Size Of Binary Tree
 
 ```
 public int size(TreeNode root) {
@@ -581,7 +580,7 @@ public int size(TreeNode root) {
 ```
 
 
-#### 3.3 Height Of Binary Tree
+#### 4.3 Height Of Binary Tree
 
 ```
 public int height(TreeNode root) {
@@ -594,7 +593,7 @@ public int height(TreeNode root) {
 }
 ```
 
-#### 3.4 Root To Leaf Sum Binary Tree
+#### 4.4 Root To Leaf Sum Binary Tree
 
 ```
 public boolean rootToLeafSum(TreeNode root, int sum, List<Integer> result) {
@@ -623,7 +622,7 @@ public boolean rootToLeafSum(TreeNode root, int sum, List<Integer> result) {
 
 ```
 
-#### 3.5 Is Binary Tree a Binary Search Tree
+#### 4.5 Is Binary Tree a Binary Search Tree
 
 ```
 public boolean isBST(TreeNode root, int min, int max) {
@@ -637,7 +636,7 @@ public boolean isBST(TreeNode root, int min, int max) {
 }
 ```
 
-#### 3.6 Lowest Common Ancestor in Binary Search Tree
+#### 4.6 Lowest Common Ancestor in Binary Search Tree
 
 ```
 public TreeNode lowestCommonAncestor(TreeNode root, int p, int q) {
@@ -651,7 +650,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, int p, int q) {
 }
 ```
 
-#### 3.6.1 Lowest Common Ancestor in Binary Tree
+#### 4.6.1 Lowest Common Ancestor in Binary Tree
 
 ```
 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode t1, TreeNode t2) {
@@ -672,7 +671,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode t1, TreeNode t2) {
 }
 ```
 
-#### 3.7 Largest BST in Binary Tree
+#### 4.7 Largest BST in Binary Tree
 
 ```
 /**
