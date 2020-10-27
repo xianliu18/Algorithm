@@ -101,5 +101,6 @@ public class AVLTree {
 ```
 
 **参考资料:**
+- [AVL Tree Insertion](https://www.youtube.com/watch?v=rbg7Qf8GkQ4&list=PLrmLmBdmIlpv_jNDXtJGYTPNQ2L1gdHxu&index=21)
 - [Wikipedia](https://en.wikipedia.org/wiki/AVL_tree)
 - [GeeksforGeeks](https://www.geeksforgeeks.org/avl-tree-set-1-insertion/)
