@@ -34,7 +34,7 @@ public TreeNode buildTree(int[] preorder, int[] inorder) {
             stack.push(left);
             i++;
         } else {
-            while (!stack.isEmpty() && stack.peek().val) {
+            while (!stack.isEmpty() && stack.peek().val == inorder[j]) {
                 curr = stack.pop();
                 j++;
             }

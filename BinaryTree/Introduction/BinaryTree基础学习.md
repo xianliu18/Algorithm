@@ -295,7 +295,7 @@ public void levelByLevelOneQueueUsingDelimiter(TreeNode root) {
     q.add(root);
     q.add(null);
     while (!q.isEmpty()) {
-        root = q.pop();
+        root = q.poll();
         if (root != null) {
             System.out.println(root.val + " ");
             if (root.left != null) {
@@ -324,7 +324,7 @@ public void levelByLevelOneQueueUsingCount(TreeNode root) {
     q.add(root);
     while (!q.isEmpty()) {
         while (levelCount > 0) {
-            root = q.pop();
+            root = q.poll();
             System.out.println(root.val + " ");
             if (root.left != null) {
                 currentCount++;
