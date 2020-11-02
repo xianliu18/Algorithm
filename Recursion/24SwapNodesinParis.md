@@ -37,10 +37,13 @@ public ListNode swapPairs(ListNode head) {
     }
 
     ListNode result = head.next;
-    result.next = head;
+
+    // 易错点:直接在此处; result.next = head.next.next, 因此后续方法是死循环
+    // result.next = head;
 
     // 此处,返回的为链表头部
     head.next = swapPairs(head.next.next);
+    result.next = head;
 
     return result;
 }
