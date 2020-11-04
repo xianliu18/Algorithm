@@ -70,6 +70,30 @@ class Solution {
         return head;
     }
 
+    // 正常遍历:解法2
+    public ListNode mergeTwoLists02(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        } else if (l2 == null) {
+            return l1;
+        }
+
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                curr.next = l1;
+                l1 = l1.next;
+            } else {
+                curr.next = l2;
+                l2 = l2.next;
+            }
+            curr = curr.next;
+        }
+        curr.next = l1 == null ? l2 : l1;
+        return dummy.next;
+    }
+
     // 解法二:递归
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null || l2 == null) {
@@ -88,3 +112,6 @@ class Solution {
     }
 }
 ```
+
+**参考资料:**
+- [Java using recursion评论部分](https://leetcode.com/problems/merge-two-sorted-lists/discuss/9715/Java-1-ms-4-lines-codes-using-recursion)
