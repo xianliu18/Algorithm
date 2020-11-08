@@ -130,7 +130,7 @@ public void iterInOrder(TreeNode head) {
             if (s.isEmpty()) {
                 break;
             }
-            head = head.pop();
+            head = stack.pop();
             System.out.println(head.val);
             head = head.right;
         }
