@@ -60,3 +60,4 @@ private void helper(int n, boolean[] v, boolean[] l, boolean[] r, int row) {
 
 **参考资料**
 - [Java Solution](https://leetcode.com/problems/n-queens-ii/discuss/20058/Accepted-Java-Solution)
+- [N Queen Problem Using Backtracking Algorithm](https://www.youtube.com/watch?v=xouin83ebxE)
