@@ -34,21 +34,6 @@ private void backtrack(List<String> list, String str, int open, int close, int m
     }
 } 
 
-// 优化版本: use StringBuilder, instead of string concatenation
-private void backtrack(List<String> list, StringBuilder sb, int open, int close, int n) {
-    // base case
-    if (open == n && close == n) {
-        list.add(sb.toString);
-        return;
-    }
-
-    if (open < n) {
-        sb.append("(");
-        backtrack(list, sb, open + 1, close, n);
-        
-    }
-}
-
 ```
 
 **参考资料**
