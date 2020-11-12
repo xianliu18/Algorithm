@@ -45,13 +45,13 @@ private void backtrack(List<List<Integer>> result, List<Integer> subList, int st
 public List<List<Integer>> getSkyline(int[][] buildings) {
 
     if (buildings.length == 0) {
-        return new Linkedlist<List<Integer>>();
+        return new LinkedList<List<Integer>>();
     }
 
     return recurSkyline(buildings, 0, buildings.length - 1);
 }
 
-private Linkedlist<List<Integer>> recurSkyline(int[][] buildings, int p, int q) {
+private LinkedList<List<Integer>> recurSkyline(int[][] buildings, int p, int q) {
     if (p < q) {
         int mid = p + (q - p) / 2;
         return merge(recurSkyline(buildings, p, mid), recurSkyline(buildings, mid + 1, q));
