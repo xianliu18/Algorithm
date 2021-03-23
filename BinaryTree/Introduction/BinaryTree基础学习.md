@@ -15,7 +15,7 @@ public class TreeNode {
     TreeNode left;
     TreeNode right;
     TreeNode() {}
-    TreeNode(int vval) {
+    TreeNode(int val) {
         this.val = val;
     }
     TreeNode(int val, TreeNode left, TreeNode right) {
@@ -127,7 +127,7 @@ public void iterInOrder(TreeNode head) {
             stack.push(head);
             head = head.left;
         } else {
-            if (s.isEmpty()) {
+            if (stack.isEmpty()) {
                 break;
             }
             head = stack.pop();
